@@ -23,6 +23,7 @@ class Main {
             }
         }
         System.out.println("Exiting...");
+        System.out.println("Exiting...");
         server.terminate();
     }
 }
