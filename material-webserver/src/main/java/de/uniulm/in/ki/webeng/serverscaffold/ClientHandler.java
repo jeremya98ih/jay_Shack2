@@ -98,6 +98,8 @@ public class ClientHandler implements Runnable {
         System.out
                 .println("my code...is da bomb");
         System.out
+                .println("my code...is da bomb");
+        System.out
                 .println("Request received. Request handling pending...");
     }
 }
