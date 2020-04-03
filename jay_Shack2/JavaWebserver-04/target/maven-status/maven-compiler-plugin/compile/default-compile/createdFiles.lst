@@ -1,7 +1,7 @@
 de/uniulm/in/ki/webeng/serverscaffold/httphandlers/DELETEHandler.class
 de/uniulm/in/ki/webeng/serverscaffold/HTTPMessageBuilder.class
-de/uniulm/in/ki/webeng/serverscaffold/MIMEHandler.class
 de/uniulm/in/ki/webeng/serverscaffold/httphandlers/HEADHandler.class
+de/uniulm/in/ki/webeng/serverscaffold/MIMEHandler.class
 de/uniulm/in/ki/webeng/serverscaffold/ServerConfiguration.class
 de/uniulm/in/ki/webeng/serverscaffold/ServerThread.class
 de/uniulm/in/ki/webeng/serverscaffold/ClientHandler.class
