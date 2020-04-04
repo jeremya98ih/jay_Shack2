@@ -15,6 +15,7 @@ public class HTTPMessageBuilder {
     private String head = "";
     private byte[] body = new byte[0];
     private Request req = null;
+    private Response res = null;
     private int remaining = -1;
     private Map<String, String> headers = null;
 
@@ -69,7 +70,7 @@ public class HTTPMessageBuilder {
      *         completed yet
      */
     public Request getRequest() {
-        if (req == null) {
+            if (req == null) {
             String method = head.substring(0, head.indexOf("\r\n"));
             String[] first = method.split(" ");
             req = new Request(first[0], first[1], first[2], headers, body);
@@ -84,7 +85,23 @@ public class HTTPMessageBuilder {
      *         completed yet
      */
     public Response getResponse() {
-        // TODO Implement
-        return null;
+        
+            if (res == null) {
+            String method = head.substring(0, head.indexOf("\r\n"));
+            String status = method.substring(method.indexOf(" ") + 1, method.length());
+            String statusNum = status.substring(0,status.indexOf(" "));
+            String statusStr = status.substring(status.indexOf(" ") + 1, status.length());
+            int statusInt = Integer.parseInt(statusNum);
+            res = new Response();
+            res.setResponseCode(statusInt, statusStr);
+
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                res.addHeader(entry.getKey(), entry.getValue());
+            }
+            
+            res.setBody(body);
+
+            }
+            return res;
     }
 }

@@ -1,6 +1,10 @@
 package de.uniulm.in.ki.webeng.serverscaffold;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 
 import de.uniulm.in.ki.webeng.serverscaffold.model.Response;
@@ -40,9 +44,24 @@ public class ResponseValidator {
      *            The original response
      */
     public static void saveCache(Response remoteResponse) {
-        // TODO implement
+        WriteObjectToFile(remoteResponse);
     }
 
+
+    private static void WriteObjectToFile(Object serObj) {
+ 
+        try {
+ 
+            FileOutputStream fileOut = new FileOutputStream(ServerConfiguration.cachePath.toString());
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(serObj);
+            objectOut.close();
+            System.out.println("The Object  was succesfully written to a file");
+ 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
     /**
      * Loads a response from the local cache
      *
@@ -50,7 +69,26 @@ public class ResponseValidator {
      */
     public static Response loadCache() {
         // TODO implement
-        return null;
+        return ReadObjectFromFile();
+    }
+
+       private static Response ReadObjectFromFile() {
+ 
+        try {
+ 
+            FileInputStream fileIn = new FileInputStream(ServerConfiguration.cachePath.toString());
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+ 
+            Response obj = (Response) objectIn.readObject();
+ 
+            System.out.println("The Object has been read from the file");
+            objectIn.close();
+            return obj;
+ 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
     /**
